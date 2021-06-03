@@ -3,7 +3,6 @@ package com.example.inventario.di
 
 
 import com.example.inventario.network.ApiClient
-import com.example.inventario.BuildConfig.DEBUG
 import com.example.inventario.utils.ConnectionUtils
 import com.example.inventario.utils.ConnectionUtilsImpl
 import com.google.gson.FieldNamingPolicy
@@ -38,12 +37,6 @@ val retrofitModule = module {
         var okHttpClientBuilder = OkHttpClient.Builder()
             .connectTimeout(connectTimeOut, TimeUnit.SECONDS)
             .readTimeout(readTimeOut, TimeUnit.SECONDS)
-        if (DEBUG){
-            val httpLoginInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-            okHttpClientBuilder.addInterceptor(httpLoginInterceptor)
-        }
         okHttpClientBuilder.build()
         return okHttpClientBuilder.build()
     }
